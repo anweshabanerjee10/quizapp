@@ -2,9 +2,12 @@ import { Box, Button, CircularProgress, Typography } from '@mui/material'
 import SelectField from '../components/SelectField'
 import TextFieldComp from '../components/TextFieldComp'
 import fileAxios from '../hooks/fileAxios'
+import { useNavigate } from 'react-router-dom'
 
 const Settings = () => {
   const { response, error, loading } = fileAxios({ url: '/api_category.php' })
+
+  const history = useNavigate()
 
   if (loading) {
     return (
@@ -34,6 +37,7 @@ const Settings = () => {
   ]
   const handleSubmit = (e) => {
     e.preventDefault()
+    history('/questions')
   }
   return (
     <form onSubmit={handleSubmit}>

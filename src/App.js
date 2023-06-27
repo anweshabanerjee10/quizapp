@@ -27,7 +27,7 @@ function App() {
               }
             ></Route>
             <Route exact path="/questions" element={<Questions />} />
-            <Route exact path="/finalscreen" element={<FinalScreen />} />
+            <Route exact path="/score" element={<FinalScreen />} />
           </Routes>
         </Box>
       </Container>
