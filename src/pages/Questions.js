@@ -68,17 +68,28 @@ const Questions = () => {
 
   const handleClickAnswer = (e) => {
     const question = response.results[questionIndex]
-    if (e.target.textContent === question.correct_answer) {
+    const isCorrectAnswer = e.target.textContent === question.correct_answer
+
+    if (isCorrectAnswer) {
       dispatch(handleChangeScore(score + 1))
+      e.target.style.backgroundColor = 'green'
+    } else {
+      e.target.style.backgroundColor = 'red'
     }
+
+    // Delaying the color reset using setTimeout
+    setTimeout(() => {
+      e.target.style.backgroundColor = ''
+    }, 200)
     if (questionIndex + 1 < response.results.length) {
       setQuestionIndex(questionIndex + 1)
     } else {
       navigate(`/score`)
     }
   }
+
   return (
-    <Box>
+    <Box className="container">
       <Typography variant="h4">Question {questionIndex + 1}</Typography>
       <Typography mt={5}>
         {decode(response.results[questionIndex].question)}
@@ -90,6 +101,7 @@ const Questions = () => {
           </Button>
         </Box>
       ))}
+
       <Box mt={5}>
         <Button>
           Score :{score}/{response.results.length}
